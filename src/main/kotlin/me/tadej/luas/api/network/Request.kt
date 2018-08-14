@@ -16,14 +16,14 @@
 package me.tadej.luas.api.network
 
 import io.reactivex.Single
-import me.tadej.luas.api.xml.AbstractXmlParser
+import me.tadej.luas.api.xml.XmlParser
 import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.URL
 
 internal class Request<T>(
     private val url: String,
-    private val parser: AbstractXmlParser<T>,
+    private val parser: XmlParser<T>,
     private val timeout: Int,
     private val useCache: Boolean
 ) {
