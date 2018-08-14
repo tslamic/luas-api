@@ -2,12 +2,13 @@ plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.2.51'
     id 'com.diffplug.gradle.spotless' version '3.13.0'
     id 'com.gradle.build-scan' version '1.15.1'
+    id 'me.tadej.versioning' version '0.1.1'
 }
 
 apply plugin: 'jacoco'
 
 group = 'me.tadej'
-version = '0.0.1'
+version = versioning.versionName()
 
 repositories {
     mavenCentral()
