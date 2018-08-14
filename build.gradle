@@ -1,0 +1,42 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.2.51'
+    id 'com.diffplug.gradle.spotless' version '3.13.0'
+}
+
+apply plugin: 'jacoco'
+
+group = 'me.tadej'
+version = '0.0.1'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    compile 'io.reactivex.rxjava2:rxkotlin:2.2.0'
+    testCompile 'com.google.truth:truth:0.42'
+}
+
+spotless {
+    kotlin {
+        target '**/*.kt'
+        ktlint('0.24.0')
+        licenseHeaderFile project.rootProject.file('misc/header.txt')
+    }
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled false
+    }
+}
+
+check.dependsOn jacocoTestReport
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}

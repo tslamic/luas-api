@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<stopInfo created="2018-08-11T10:51:51" stop="Bride's Glen" stopAbv="BRI">
+    <message>Green Line services operating normally</message>
+    <direction name="Inbound">
+        <tram dueMins="6" destination="Parnell"/>
+    </direction>
+    <direction name="Outbound">
+        <tram destination="No trams forecast" dueMins=""/>
+    </direction>
+</stopInfo>
