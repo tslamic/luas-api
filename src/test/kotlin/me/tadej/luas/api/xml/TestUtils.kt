@@ -19,7 +19,7 @@ package me.tadej.luas.api.xml
 
 import java.io.InputStream
 
-fun parseResource(resourceName: String, test: (InputStream) -> Unit) {
+fun withResource(resourceName: String, test: (InputStream) -> Unit) {
     val classLoader = ClassLoader.getSystemClassLoader()
     classLoader.getResourceAsStream(resourceName).use {
         test(it)

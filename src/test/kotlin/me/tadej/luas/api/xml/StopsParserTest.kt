@@ -22,7 +22,7 @@ import org.junit.Test
 
 class StopsParserTest {
     @Test
-    fun parse_withStopsResource() = parseResource("stops.xml") {
+    fun parse_withStopsResource() = withResource("stops.xml") {
         val parser = StopsParser()
 
         val lines = parser.parse(it)
@@ -64,7 +64,7 @@ class StopsParserTest {
     }
 
     private fun parse_withStopsResource_hasStop(lineName: String, vararg stops: Stop) {
-        parseResource("stops.xml") {
+        withResource("stops.xml") {
             val parser = StopsParser()
             val lines = parser.parse(it)
             val line = lines.getLineWithName(lineName)

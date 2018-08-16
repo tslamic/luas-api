@@ -21,7 +21,7 @@ import org.junit.Test
 
 class ForecastParserTest {
     @Test
-    fun parse_withRanelaghResource() = parseResource("ranelagh.xml") {
+    fun parse_withRanelaghResource() = withResource("ranelagh.xml") {
         val parser = ForecastParser()
 
         val forecast = parser.parse(it)
@@ -45,7 +45,7 @@ class ForecastParserTest {
     }
 
     @Test
-    fun parse_withBridesGlenResource() = parseResource("bridesglen.xml") {
+    fun parse_withBridesGlenResource() = withResource("bridesglen.xml") {
         val parser = ForecastParser()
 
         val forecast = parser.parse(it)
