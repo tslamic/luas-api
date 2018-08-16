@@ -27,7 +27,7 @@ internal class Request<T>(
     private val timeout: Int,
     private val useCache: Boolean
 ) {
-    fun get(): Single<T> = Single.just(performGetRequest())
+    fun get(): Single<T> = Single.fromCallable { performGetRequest() }
 
     @Throws(IOException::class)
     private fun performGetRequest(): T {
