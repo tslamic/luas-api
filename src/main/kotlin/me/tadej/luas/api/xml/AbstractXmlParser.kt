@@ -35,5 +35,5 @@ abstract class AbstractXmlParser<T>(
         return convert(document)
     }
 
-    protected abstract fun convert(document: Document): T
+    internal abstract fun convert(document: Document): T
 }
