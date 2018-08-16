@@ -19,16 +19,21 @@ import io.reactivex.Single
 import me.tadej.luas.api.model.Forecast
 import me.tadej.luas.api.model.Line
 import me.tadej.luas.api.network.Request
-import me.tadej.luas.api.xml.AbstractXmlParser
 import me.tadej.luas.api.xml.ForecastParser
 import me.tadej.luas.api.xml.StopsParser
+import me.tadej.luas.api.xml.XmlParser
 
 class LuasApi(
-    private val forecastParser: AbstractXmlParser<Forecast> = ForecastParser(),
-    private val stopsParser: AbstractXmlParser<List<Line>> = StopsParser(),
+    private val forecastParser: XmlParser<Forecast> = ForecastParser(),
+    private val stopsParser: XmlParser<List<Line>> = StopsParser(),
     private val timeout: Int = 10_000,
     private val useCache: Boolean = false
 ) {
+    /**
+     * Returns the list of all available lines with its corresponding stops.
+     *
+     * @see Line
+     */
     fun stops(): Single<List<Line>> =
         Request(
             URL_STOPS,
@@ -37,15 +42,29 @@ class LuasApi(
             useCache
         ).get()
 
-    fun forecast(stopName: String): Single<Forecast> =
-        Request(
-            URL_FORECAST.format(stopName.toLowerCase()),
+    /**
+     * Returns the forecast for a specific stop.
+     * @param stopAbbreviation the abbreviated stop name. For example, use "RAN" instead of Ranelagh.
+     *
+     * @see Forecast
+     */
+    fun forecast(stopAbbreviation: String): Single<Forecast> {
+        if (stopAbbreviation.isInvalid()) {
+            throw IllegalArgumentException("invalid stop abbreviation")
+        }
+        val stop = stopAbbreviation.toLowerCase()
+        return Request(
+            URL_FORECAST.format(stop),
             forecastParser,
             timeout,
             useCache
         ).get()
+    }
+
+    private fun String.isInvalid() = length != ABBREVIATION_LENGTH || isBlank()
 
     companion object {
+        private const val ABBREVIATION_LENGTH = 3
         private const val URL_FORECAST =
             "http://luasforecasts.rpa.ie/xml/get.ashx?action=forecast&stop=%s&encrypt=false"
         private const val URL_STOPS =
