@@ -20,7 +20,7 @@ allprojects {
 Then add the following to your `dependencies` block:
 
 ```groovy
-implementation 'com.github.tslamic:luas-api:0.1.1'
+implementation 'com.github.tslamic:luas-api:0.1.2'
 ```
 
 ## Examples
