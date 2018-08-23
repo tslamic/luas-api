@@ -33,7 +33,7 @@ internal class Request<T>(
     private fun performGetRequest(): T {
         var connection: HttpURLConnection? = null
         return try {
-            connection = openConnection("GET")
+            connection = openXmlConnection("GET")
             val responseCode = connection.responseCode
             when {
                 responseCode == -1 -> throw IOException("invalid responseCode")
@@ -48,7 +48,7 @@ internal class Request<T>(
     }
 
     @Throws(IOException::class)
-    private fun openConnection(method: String): HttpURLConnection {
+    private fun openXmlConnection(method: String): HttpURLConnection {
         val connection = URL(url).openConnection() as HttpURLConnection
         connection.requestMethod = method
         connection.instanceFollowRedirects = HttpURLConnection.getFollowRedirects()

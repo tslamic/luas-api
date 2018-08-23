@@ -29,11 +29,11 @@ implementation 'com.github.tslamic:luas-api:0.1.1'
 val api = LuasApi()
 
 // Get LUAS lines and its corresponding stops
-api.stops()
+api.lines()
   .subscribeOn(Schedulers.io())
   .observeOn(AndroidSchedulers.mainThread())
   .subscribe(
-    { showStops(it) },
+    { showLines(it) },
     { showError(it) }
   )
         

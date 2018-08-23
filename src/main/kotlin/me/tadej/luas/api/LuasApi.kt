@@ -34,7 +34,7 @@ class LuasApi(
      *
      * @see Line
      */
-    fun stops(): Single<List<Line>> =
+    fun lines(): Single<List<Line>> =
         Request(
             URL_STOPS,
             stopsParser,
